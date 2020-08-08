@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/formValidator.js"></script>
+    <title>Registration</title>
+</head>
+
+<body>
+    <form id="registration" onsubmit="return validateFields()">
+        <h4>Registration</h4>
+        <label id="successful-message"></label>
+        <label id="error-message"></label>
+        <div class="wrapper">
+            <label for="username">Username<sup>*</sup>:</label>
+            <input type="text" id="username" class="fieldsStyle" onfocusout="isUsernameValid()" required>
+            <label class="invalid-field" id="invalid-username"></label>
+        </div>
+        <div class="wrapper">
+            <label for="username">First and last name<sup>*</sup>:</label>
+            <input type="text" id="names" class="fieldsStyle" onfocusout="isNamesValid()" required>
+            <label class="invalid-field" id="invalid-names"></label>
+        </div>
+        <div class="wrapper">
+            <label for="username">E-mai<sup>*</sup>:</label>
+            <input type="text" id="email" class="fieldsStyle" onfocusout="isEmailValid()" required>
+            <label class="invalid-field" id="invalid-email"></label>
+        </div>
+        <div class="wrapper">
+            <label for="username">Password<sup>*</sup>:</label>
+            <input type="password" id="password" class="fieldsStyle" onfocusout="isPasswordValid()" required>
+            <label class="invalid-field" id="invalid-password"></label>
+        </div>
+        <fieldset>
+            <legend>Address</legend>
+            <div class="wrapper">
+                <label for="username">Street:</label>
+                <input type="text" id="street" class="fieldsStyle">
+                <label class="invalid-field" id="invalid-street"></label>
+            </div>
+            <div class="wrapper">
+                <label for="username">City:</label>
+                <input type="text" id="city" class="fieldsStyle">
+                <label class="invalid-field" id="invalid-city"></label>
+            </div>
+            <div class="wrapper">
+                <label for="username">Zip code:</label>
+                <input type="text" id="zip-code" class="fieldsStyle" onfocusout="isZipCodeValid()">
+                <label class="invalid-field" id="invalid-zipCode"></label>
+            </div>
+        </fieldset>
+        <div class="wrapper">
+            <input type="submit" class="fieldsStyle" id="registrationButon" value="Registration">
+        </div>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+form {
+    background-color: #f4f5f0;
+    width: 500px;
+    border: 1px solid;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#error-message,
+#successful-message {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#error-message {
+    color: #ff0000;
+}
+
+#successful-message {
+    color: #008000;
+}
+
+fieldset>.wrapper {
+    width: 472px;
+}
+
+h4 {
+    background-color: #97c00e;
+    text-align: center;
+    color: white;
+    padding: 7px;
+    margin: 0px 0px 10px 0px;
+}
+
+.fieldsStyle {
+    margin-bottom: 10px;
+    width: 200px;
+    height: 25px;
+    margin-right: 20px;
+    margin-left: 20px;
+    padding-bottom: 5px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
+}
+
+label {
+    width: 170px;
+    margin-left: 5px;
+}
+
+.invalid-field {
+    color: #ff0000;
+    font-weight: bold;
+    text-align: center;
+    margin-right: 5px;
+}
+
+#registrationButon {
+    background-color: #97c00e;
+    color: white;
+    height: 35px;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+}

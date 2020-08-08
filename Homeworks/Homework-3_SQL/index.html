@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/formValidator.js"></script>
+    <title>Candidate form</title>
+</head>
+
+<body>
+    <form method="POST" onsubmit="return validateFields()" action="index.php" enctype="multipart/form-data">
+        <h2>Candidate information</h2>
+        <div class="wrapper">
+            <label for="firstname">First name:</label>
+            <input type="text" id="firstname" name="firstname" onfocusout="isFirstnameValid()" required>
+            <label class="invalid-field" id="invalid-firstname"></label>
+        </div>
+        <div class="wrapper">
+            <label for="lastname">Last name:</label>
+            <input type="text" id="lastname" name="lastname" onfocusout="isLastnameValid()" required>
+            <label class="invalid-field" id="invalid-lastname"></label>
+        </div>
+        <div class="wrapper">
+            <label for="course">Course:</label>
+            <input type="number" min="1" max="6" id="course" name="course" onfocusout="isCourseValid()" required>
+            <label class="invalid-field" id="invalid-course"></label>
+        </div>
+        <div class="wrapper">
+            <label for="speciality">Speciality:</label>
+            <input type="text" id="speciality" name="speciality" onfocusout="isSpecialityValid()" required>
+            <label class="invalid-field" id="invalid-speciality"></label>
+        </div>
+        <div class="wrapper">
+            <label for="faculty-number">Faculty number:</label>
+            <input type="text" id="faculty-number" name="faculty-number" onfocusout="isFacultyNumberValid()" required>
+            <label class="invalid-field" id="invalid-faculty-number"></label>
+        </div>
+        <div class="wrapper">
+            <label for="group">Group:</label>
+            <input type="number" min="1" max="10" id="group" name="group" onfocusout="isGroupValid()" required>
+            <label class="invalid-field" id="invalid-group"></label>
+        </div>
+        <div class="wrapper">
+            <label for="birth-date">Date of birth:</label>
+            <input type="date" min="1900-12-31" max="2002-12-31" id="birth-date" name="birth-date" onfocusout="showZodiacSign()" required>
+        </div>
+        <div class="wrapper">
+            <label for="group">Zodiac sign:</label>
+            <input type="text" id="zodiac-sign" name="zodiac-sign" readonly></input>
+        </div>
+        <div class="wrapper">
+            <label for="social-link">Social link:</label>
+            <input type="url" id="social-link" name="social-link" onfocusout="isSocialLinkValid()" required>
+            <label class="invalid-field" id="invalid-social-link"></label>
+        </div>
+        <div class="wrapper">
+            <label for="photo">Photo:</label>
+            <input type="file" accept="image/*" id="photo" name="photo" required>
+        </div>
+        <div class="wrapper">
+            <label for="motivation">Motivation for candidate:</label>
+            <textarea id="motivation" name="motivation" onfocusout="isMotivationValid()" required></textarea>
+            <label id="invalid-motivation" class="invalid-field"></label>
+        </div>
+        <div class="wrapper">
+            <input type="submit" name="candidate" value="Candidate">
+        </div>
+    </form>
+</body>
+
+</html>

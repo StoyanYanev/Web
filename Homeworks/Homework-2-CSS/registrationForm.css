@@ -1,0 +1,124 @@
+.wrapper {
+    width: 600px;
+    height: 400px;
+    background-color: #ececec;
+    border: 1px solid;
+}
+
+#login-container {
+    background-color: #34495e;
+    border: 1px solid;
+    height: 265px;
+}
+
+#login-container,
+#registration-container {
+    width: 270px;
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#login-container>form>h4 {
+    color: #FFFFFF;
+}
+
+h3,
+h4 {
+    color: #34495e;
+}
+
+h3,
+h4,
+p {
+    text-indent: 25px;
+}
+
+h4 {
+    text-transform: uppercase;
+}
+
+.registration-field {
+    width: 220px;
+    height: 25px;
+    margin: 0px 20px 10px 20px;
+}
+
+#registration-button {
+    width: 150px;
+    height: 30px;
+    margin-left: 96px;
+    background-color: transparent;
+    color: #34495e;
+    border: 2px solid #34495e;
+    font-weight: bold;
+}
+
+#registration-button:hover {
+    background-color: #34495e;
+    color: #FFFFFF;
+}
+
+#login-button {
+    width: 100px;
+    height: 30px;
+    background-color: #34495e;
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+    font-weight: bold;
+}
+
+#login-button:hover {
+    background-color: #FFFFFF;
+    color: #34495e;
+}
+
+#forgot-password {
+    color: #FFFFFF;
+    margin-left: 130px;
+    font-size: small;
+}
+
+#section {
+    margin-left: 20px;
+}
+
+#section>input[type="checkbox"] {
+    display: none;
+}
+
+#section>label {
+    display: inline-block;
+    position: relative;
+    color: #FFFFFF;
+    padding-left: 25px;
+}
+
+#section>label::before {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    content: "";
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF;
+    left: 0;
+}
+
+#section>label::after {
+    position: absolute;
+    width: 8px;
+    height: 5px;
+    left: 4px;
+    top: 4px;
+    border-left: 3px solid;
+    border-bottom: 3px solid;
+    transform: rotate(-45deg);
+}
+
+#section>input[type="checkbox"]+label::after {
+    content: none;
+}
+
+#section>input[type="checkbox"]:checked+label::after {
+    content: "";
+}
