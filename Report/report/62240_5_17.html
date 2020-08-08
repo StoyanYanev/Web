@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./css/git.css">
+    <link rel="icon" href="./img/git-icon.png" type="image/x-icon">
+    <script src="./javascript/git.js"></script>
+    <title>Git</title>
+</head>
+
+<body>
+    <div id="menu">
+        <a href="#VCS" class="active">Какво е система за контрол на версиите?</a>
+        <a href="#repository">Какво е репозитори?</a>
+        <a href="#distributed-centralized-VCS">Разпределена и централизирана система за контрол на версиите</a>
+        <a href="#intro-git">Въведение в Git</a>
+        <a href="#characteristics-git">Характеристики на Git</a>
+        <a href="#git-commands">Често използвани команди в Git</a>
+        <a href="#best-practices">Добри практики</a>
+        <a href="#resources">Използвана литература</a>
+        <a href="#code-used">Списък с примерен програмен код</a>
+        <a href="#img-used">Списък с фигури</a>
+        <a href="#author">Автор</a>
+    </div>
+    <h1>Използване на git - добри практики</h1>
+    <div class="block-content">
+        <h2 id="VCS">Какво е система за контрол на версиите?
+            <sup>
+                <a href="#git-documentation"> [1],</a>
+                <a href="#how-to-make"> [3]</a>
+            </sup>
+        </h2>
+        <hr>
+        <p>
+            Система за контрол на версиите е средство за проследяване и запис на промените по даден файл (или множество файлове) във времето. Това дава възможност за възстановяване или връщане към произволна версия.
+        </p>
+        <p>
+            Системите за контрол на версиите позволяват повече от един човек да работи по даден проект. Всеки може да редактира своето локално копие на файловете и да избира кога да сподели тези промени с останалата част от екипа. Така временните или частичните редакции
+            от едно лице не пречат на работата на другите лица, които работят по същия проект. За всяка част на файл може да се определи кога, защо и от кого е редактирана.
+        </p>
+        <p>
+            Контролът на версиите дава достъп до всички предходни версии на един проект. Това ни предпазва в случаите на нежелани ситуации като компютърен срив или загуба на данни.
+        </p>
+    </div>
+    <div class="block-content">
+        <h2 id="repository">Какво е хранилище?
+            <sup>
+                <a href="#VCS-concepts">[2]</a>
+            </sup>
+        </h2>
+        <hr>
+        <p>
+            Хранилище е база данни за всички редакции и предходни версии на даден проект. Възможно е хранилището да съдържа редакции, които все още не са приложени към работното копие. Работно копие е вашето лично копие на всички файлове в проекта. Вие може да правите
+            произволни редакции на това копие, без да засягате останалите, които също работят по проекта. Когато приключите с редакциите си, вие можете да добавите(къмитнете) промените в хранилището. Може да актуализирате работното си копие, за да се
+            включат към него всички нови редакции или версии, които са били добавени в хранилището.
+        </p>
+        <figure>
+            <img src="./img/version-history.png">
+            <figcaption>Фигура 1. Схема за история на версиите <a href="#figure1">[1]</a></figcaption>
+        </figure>
+        <p>
+            В най-простия случай базата данни съдържа линейна история: всяка промяна се извършва след предишната. Друга възможност е различни потребители да правят редакции едновременно (това понякога се нарича „разклоняване“). В този случай историята на версиите
+            се разделя и след това отново се слива.
+        </p>
+    </div>
+    <div class="block-content">
+        <h2 id="distributed-centralized-VCS">Разпределена и централизирана система за контрол на версиите
+            <sup>
+                <a href="#git-documentation"> [1],</a>
+                <a href="#VCS-concepts"> [2]</a>
+            </sup>
+        </h2>
+        <hr>
+        <h3>Централизирана система за контрол на версиите</h3>
+        <p>
+            Централизираните системи за контрол на версиите възникват от нуждата повече разработчици да работят върху един проект на различни компютри.
+        </p>
+        <p>
+            Тези системи, използват един сървър, съдържащ всички работни файлове и множество от клиенти, които достъпват файловете от това централно място. Предимството на този подход е, че всеки участник в проекта е добре запознат с работата на останалите. Недостатъкът
+            на този подход е, че всички данни се пазят на едно място и зависят от надеждността на сървъра, който ги съхранява.
+        </p>
+        <p>
+            Ако сървърът по някаква причина не е достъпен за час - тогава никой не може да качва своите промени. В най-лошия случай, ако се повреди диск на сървъра и не разполагаме с архиви - ще изгубим абсолютно всичко, цялата история на проекта, освен ако някой
+            потребител няма snapshot на проекта на локалния си компютър. Локалните VCS са изложени на същия риск — ако цялата история на проекта се пази само на едно място, рискуваме да я изгубим изцяло.
+        </p>
+        <h3>Разпределена система за контрол на версиите</h3>
+        <p>
+            Разпределените системи за контрол решават проблема на централизираните системи, като при тях клиентите не само изтеглят последния snapshot на файловете - те клонират (копират) цялото хранилище, включително пълната му история. По този начин, ако сървърът
+            не работи, хранилището на даден проект може да се възстанови от локалното копие на всеки клиент - ако клиентът пази това копие.
+        </p>
+        <p>
+            Контролът на разпределената версия е по-добър, работи по-бързо, по-малко е склонен към грешки, има повече функции и е малко по-сложен за разбиране. Това позволява да се създадат няколко различни работни потока, което е невъзможно в централизираните системи
+            като йерархични модели.
+        </p>
+        <figure>
+            <img src="./img/centralized-VCS.png">
+            <figcaption>Фигура 2. Централизирана система за контрол на версиите <a href="#figure2">[2]</a></figcaption>
+        </figure>
+        <figure>
+            <img src="./img/distributed-VCS.png">
+            <figcaption>Фигура 3. Разпределена система за контрол на версиите <a href="#figure3">[3]</a></figcaption>
+        </figure>
+        <p>
+            Основната разлика между централизирания и разпределения контрол на версиите е броят на хранилищата. При централизирания контрол на версиите има само едно хранилище, а в разпределения контрол на версиите има няколко хранилища.
+        </p>
+    </div>
+    <div class="block-content">
+        <h2 id="intro-git">Въведение в Git
+            <sup>
+                <a href="#wikipedia"> [9]</a>
+            </sup>
+        </h2>
+        <hr>
+        <p>
+            Git е разпределена система за контрол на версиите, чрез която проследяваме промените в изходния код по време на разработка на даден софтуер. Git е предназначен за координиране на работата между програмистите. Целите му включват скорост, цялост на данните,
+            и поддръжка за разпределени, нелинейни работни процеси.
+        </p>
+        <p>
+            Git е създаден от Линус Торвалдс през 2005 г. за управление на разработката на Linux ядрото. Той е безплатен и с отворен код софтуер, разпространяван съгласно условията на GNU General Public License версия 2.
+        </p>
+    </div>
+    <div class="block-content">
+        <h2 id="characteristics-git">Характеристики на Git
+            <sup>
+                <a href="#git-documentation"> [1],</a>
+                <a href="#most-basic-git-commands"> [7]</a>
+            </sup>
+        </h2>
+        <hr>
+        <p>
+            Разлика между Git и другите системи за контрол на версиите е начинът, по който Git третира данните. При другите системи информацията се записва като списък от файлово-базирани промени.
+        </p>
+        <figure>
+            <img src="./img/deltas.png">
+            <figcaption>Фигура 4. Съхраняване на данните като списък от файлово-базирани промени. <a href="#figure4">[4]</a></figcaption>
+        </figure>
+        <p>
+            При Git информацията не се третира по този начин. При него, данните се взимат като колекция от snapshots (моментни снимки на статуса) на една файлова система. Всеки път, когато добавяме промяна или записваме статуса на нашия проект в Git, системата най-общо
+            казано прави снимка на това как изглеждат файловете ни в този момент и съхранява референция към нея. Ако някои файлове не са променени, Git не ги записва отново, а записва указател към предишния идентичен файл, който вече е съхранил.
+        </p>
+        <figure>
+            <img src="./img/snapshots.png">
+            <figcaption>Фигура 5. Записане на данните като поток от snapshot-и във времето. <a href="#figure5">[5]</a></figcaption>
+        </figure>
+        <p>
+            При Git почти всяка операция е локална – т.е не се нуждаем от информацията, която се намира в мрежата. Така ако например искаме да видим историята на нашия проект, Git не е нужно да се обръща към сървъра, а чете от локалната си база данни и ние виждаме
+            нашата история на проекта почти незабавно.
+        </p>
+        <p>
+            В Git всичко се проследява с чексуми преди да се запише. Това означава, че не е възможно да променим съдържанието на даден файл или директория без Git да знае това.
+        </p>
+        <p>
+            Механизмът, който Git използва за чек-сумите се нарича SHA-1 хеш. Това е 40-символен стринг съставен от шестнадесетични числа (0–9 и a–f) и пресметнат на базата на съдържанието на файл или структура на директория в Git.
+        </p>
+        <p>
+            Пример за това как изглежда един SHA-1 хеш - <span id="hash-code">24b9da6552252987aa493b52f8696cd6d3b00373</span>
+        </p>
+        <p>
+            Тези хешове се срещат почти навсякъде, защото Git не пази обектите в базата си данни по имена на файлове, а посредством хешираните стрингове отразяващи съдържанието им.
+        </p>
+        <h3>Заключение:</h3>
+        <p>Git позволява:</p>
+        <ul>
+            <li>Проследяване на всички файлове в един проект.</li>
+            <li>Записване на всички промени във файловете на проекта.</li>
+            <li>Възстановяване на предишни версии на файлове.</li>
+            <li>Сравняване и анализиране на кода.</li>
+            <li>Обединяване на код от различни компютри и различни членове на екипа.</li>
+        </ul>
+    </div>
+    <div class="block-content">
+        <h2 id="git-commands">Често използвани команди в Git
+            <sup>
+                <a href="#most-basic-git-commands"> [7],</a>
+                <a href="#basic-git-commands"> [8]</a>
+            </sup>
+        </h2>
+        <hr>
+        <p>
+            При работа с Git, първо трябва да се създаде локално хранилище в основната директория на проект. За да стане един проект видим за останалите членове на екипа, той трябва да бъде качен в отдалечено хранилище. Може да създадем такова отдалечено хранилище
+            с помощта на GitHub, BitBucket и GitLab.
+        </p>
+        <figure>
+            <img src="./img/local-and-remote-git-repositories.jpg">
+            <figcaption>Фигура 6. Локално и отдалечено хранилище. <a href="#figure6">[6]</a></figcaption>
+        </figure>
+        <p>
+            Благодарение на Git целият проект може да бъде копиран в отдалечено хранилище, като същевременно се съхранява и в локално хранилище.
+        </p>
+        <p>
+            Първо трябва да бъде инсталиран Git, за целта може да се следват инструкциите от <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git"><span id="link">тук.</span></a> След което трябва да бъде създаден акаунт в някое от отдалечените
+            хранилища. За примера ще използваме GitHub.
+        </p>
+        <h3>Команди</h3>
+        <ul>
+            <li>
+                <p>
+                    <code>git config</code> - използва се за задаване на специфични за потребителя конфигурационни стойности като имейл, потребителско име, формат на файла и т.н
+                </p>
+                <figure>
+                    <img class="command-img" src="./img/configuring-git.png">
+                    <figcaption>Код 1. Пример за конфигуриране на git. <a href="#code1">[1]</a></figcaption>
+                </figure>
+                <p>
+                    Глобалният флаг --global казва на Git, че този имейл ще бъде използван за всички локални хранилища. За да бъдат използвани различни имейли за различни хранилища, трябва да бъде използвана следната команда:
+                </p>
+                <p>
+                    <code>git config --local user.email youremail@example.com</code>
+                </p>
+                <p>
+                    <code>git config --local user.name yourUserName</code>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <code>git init</code> - Изпълнението на командата ще инициализира Git хранилище в текущата директорията. С тази команда Git създава скрита .git директория.
+                </p>
+                <figure>
+                    <img class="command-img" src="./img/git-init.png">
+                    <figcaption>Код 2. Пример за инициализиране на хранилище. <a href="#code2">[2]</a></figcaption>
+                </figure>
+            </li>
+            <li>
+                <p>
+                    <code>git status</code> – Показва състоянието на файловете в клона, в който се намираме в момента. По този начин може да се види списък с променените вече съществуващи файлове и новодобавените такива.
+                </p>
+                <figure>
+                    <img class="command-img" src="./img/git-status.png">
+                    <figcaption>Код 3. Пример за проверка на състоянието на файловете. <a href="#code3">[3]</a></figcaption>
+                </figure>
+            </li>
+            <li>
+                <p>
+                    <code>git commit</code> – Изпълнението на командата ще създаде snapshot на промените и ще ги запише в .git директорията.
+                </p>
+                <figure>
+                    <img class="command-img" src="./img/git-commit.png">
+                    <figcaption>Код 4. Пример за създаване на snapshot. <a href="#code4">[4]</a></figcaption>
+                </figure>
+            </li>
+            <li>
+                <p>
+                    <code>git push</code> – Изпраща локалните промени към отдалеченото хранилище.
+                </p>
+                <figure>
+                    <img class="command-img" src="./img/git-push.png">
+                    <figcaption>Код 5. Пример за изпращане на локалните промени към отдалеченото хранилище. <a href="#code5">[5]</a></figcaption>
+                </figure>
+            </li>
+            <li>
+                <p>
+                    <code>git clone</code> - използва се за копиране на отдалеченото хранилище.
+                </p>
+                <figure>
+                    <img class="command-img" src="./img/git-clone.png">
+                    <figcaption>Код 6. Пример за копиране на отдалеченото хранилище. <a href="#code6">[6]</a></figcaption>
+                </figure>
+            </li>
+            <li>
+                <p>
+                    <code>git checkout -b branchName</code> - Създаване на нов бранч.
+                </p>
+                <figure>
+                    <img class="command-img" src="./img/git-checkout-new-branch.png">
+                    <figcaption>Код 7. Пример за създаване на нов бранч. <a href="#code7">[7]</a></figcaption>
+                </figure>
+                <p>
+                    <code>git checkout branchName</code> - Преминаване от текущия бранч към друг.
+                </p>
+                <figure>
+                    <img class="command-img" src="./img/git-checkout-branch.png">
+                    <figcaption>Код 8. Пример за преминаване към друг бранч. <a href="#code8">[8]</a></figcaption>
+                </figure>
+            </li>
+            <li>
+                <p>
+                    <code>git merge branchName</code> - Сливане на два бранча.
+                </p>
+                <figure>
+                    <img class="command-img" src="./img/git-merge.png">
+                    <figcaption>Код 9. Пример за сливане на два бранча. <a href="#code9">[9]</a></figcaption>
+                </figure>
+            </li>
+            <li>
+                <p>
+                    <code>git rebase</code> - Използва се за прилагане на определени промени от един бранч към друг.
+                </p>
+                <figure>
+                    <img class="command-img" src="./img/git-rebase.png">
+                    <figcaption>Код 10. Пример за прилагане на определени промени. <a href="#code10">[10]</a></figcaption>
+                </figure>
+            </li>
+        </ul>
+    </div>
+    <div class="block-content">
+        <h2 id="best-practices">Добри практики
+            <sup>
+                <a href="#VCS-concepts"> [2],</a>
+                <a href="#how-to-make"> [3],</a>
+                <a href="#VCS-concepts"> [4]</a>
+                <a href="#git-best-practices"> [5],</a>
+                <a href="#best-practices-GIT"> [6]</a>
+                <a href="#good-commit-messages"> [10]</a>
+            </sup>
+        </h2>
+        <hr>
+        <ol>
+            <li>
+                Commit-те трябва да бъдат малки
+                <p>
+                    Всеки commit трябва да е възможно най-малък - да съдържа възможно най-малко файлове, защото по този начин:
+                </p>
+                <ul>
+                    <li>Улесняваме другите в екипа, които ще разглеждат промените.</li>
+                    <li>Code review-тата са по-ефективни.</li>
+                    <li>Ако commit-ът бъде върнат за промяна, лесно ще може да бъде оправен.</li>
+                </ul>
+            </li>
+            <li>
+                Смислени commit съобщения
+                <p>
+                    Съобщенията трябва да са ясни и описателни. Те трябва да описват накратко какви промени се били извършени. Това улеснява, както членовете на екипа, така и самите нас в бъдеще. Също така, ако използваме bug tracking система, съобщенията трябва да съдържат
+                    и идентификатора на issue-то върху, което е работено.
+                </p>
+                <figure>
+                    <img src="./img/git-commit-messages.png">
+                    <figcaption>Фигура 7. Пример за лоши commit съобщения. <a href="#figure7">[7]</a></figcaption>
+                </figure>
+                <h4>Седем правила за добри commit съобщения</h4>
+                <ol>
+                    <li>Разделяне на заглавието на commit-a от поясненията с един празен ред</li>
+                    <p>Пример: </p>
+                    <div>
+                        <pre class="highlight"><code>Derezz the master control program
+
+MCP turned out to be evil and had become intent on world domination.
+This commit throws Tron's disc into MCP (causing its deresolution)
+and turns it back into a chess game.
+                        </code>
+                    </pre>
+                    </div>
+                    <li>Заглавието на commit-a не трябва да е по-дълго от 50 символа</li>
+                    <li>Заглавието на commit-a трябва да започва с главна буква</li>
+                    <p>Например: </p>
+                    <ul class="right">
+                        <li>Accelerate to 88 miles per hour</li>
+                    </ul>
+                    <p>Вместо: </p>
+                    <ul class="wrong">
+                        <li>аccelerate to 88 miles per hour</li>
+                    </ul>
+                    <li>Заглавието на commit-a не трябва да завършва с пунктоационнен знак</li>
+                    <p>Например: </p>
+                    <ul class="right">
+                        <li>Refactor subsystem X for readability</li>
+                        <li>Update getting started documentation</li>
+                        <li>Remove deprecated methods</li>
+                        <li>Release version 1.0.0</li>
+                    </ul>
+                    <p>Вместо: </p>
+                    <ul class="wrong">
+                        <li>Fixed bug with Y</li>
+                        <li>Changing behavior of X</li>
+                    </ul>
+                    <li>Заглавието на commit-a трябва да бъде написано в повелително наклонение</li>
+                    <p>Например: </p>
+                    <ul class="right">
+                        <li>Open the pod bay doors</li>
+                    </ul>
+                    <p>Вместо: </p>
+                    <ul class="wrong">
+                        <li>Open the pod bay doors.</li>
+                    </ul>
+                    <li>Пояснението може да бъде най-много 72 символа</li>
+                    <li>В пояснението се обяснява какви промени са направеени и защо са направени</li>
+                    <p>Пример:</p>
+                    <pre class="highlight"><code>Simplify serialize.h's exception handling
+                            
+Remove the 'state' and 'exceptmask' from serialize.h's stream 
+implementations, as well as related methods.
+                        </code>
+                    </pre>
+                </ol>
+            </li>
+            <li>
+                Автоматично генерираните файлове не трябва да бъдат включвани
+                <p>
+                    Tрябва да бъдат commit-вани само файлове, които са създадени ръчно. Автоматично генерираните файлове не трябва да бъдат качвани в отдалеченото хранилище, защото те могат да бъдат генерирани по всяко време и по тях обикновено не се правят промени. Може
+                    да бъде добавен .gitignore файл в отдалеченото хранилище, за да се укаже автоматично на Git кои файлове или пътища да не бъдат проследявaни.
+                </p>
+            </li>
+            <li>
+                Stash your work
+                <p>
+                    Позволява промените, които са били извършвани по-рано, но не са готови напълно да бъдат запазени. По този начин може да се върнем към тях на по-късен етап, а междувременно може да работим върху други задачи. Друг начин, да запазим промените си е: <code>git worktree add</code>
+                </p>
+            </li>
+            <li>
+                Не оставяйте pull request-ите за дълъг период от време
+                <p>
+                    Pull request - се използва, за да покажем промените, които сме направили. След като отворим pull request останалите членове на екипа могат да ревюират промените ни и да предлагат подобрения, в резултат на което може да се наложи да направим промяна на
+                    кода. След като pull request-ът бъде одобрен, промените направени от нас се сливат с друг клон. Правенето на pull request-и е добра практика, тъй като по този начин могат да се предотвратят нежелани бъгове.
+                </p>
+                <p>
+                    Pull requests-те не трябва да бъдат оставяни за повече от 2 дни, тъй като това може да доведе до конфликти в кода и да забави процеса на работа.
+                </p>
+            </li>
+            <li>
+                Използване на CI/CD
+                <p>
+                    Може да използваме git съвместно със ситема за непрекъсната интеграция(Continuous integration – CI) / непрекъснато внедряване(Continuous delivery – CD). Това позволява кодът да бъде тестван за грешки и гарантира съвместимост със стандарти. Те се изпълняват,
+                    след като кодът бъде качен в централното хранилище.
+                </p>
+            </li>
+            <li>
+                Нова функционалност, нов бранч
+                <p>
+                    Добра практика е всяка нова функционалност да бъде в нов бранч. По този начин поддържаме останалите функционалности чисти. Всеки от членовете на даден екипа може да има свой отделен бранч, който му позволява да работи паралелно с останалите, но по изолиран
+                    начин. Git бранчовете трябва да имат смислени имена, така че другите от екипа да знаят върху какво работим.
+                </p>
+            </li>
+            <li>
+                Кодът трябва да бъде тесван преди да бъде качен в централното хранилище
+                <p>
+                    Преди да бъде commit-нат даден код в централното хранилище е добре той да бъде изтестван локално, за да не доведе до нежелани бъгове.
+                </p>
+            </li>
+            <li>
+                Не трябва да се добавя код директно в мастър бранча
+                <p>
+                    Добре е да поддържаме мастър бранча чист, поради тази причина, трябва да добавяме промените в нов бранч. След като се направи ревю и кодът бъде одобрен, текущият бранч може да се слее с мастър бранча.
+                </p>
+            </li>
+            <li>
+                Пароли не трябва да бъдат качвани в централното хранилище
+                <p>
+                    Пароли, публични или частни ключове не трябва да бъдат качвани заедно с изходния код в централното хранилище. За целта могат бъдат използвани инструмент като Hashicorp Vault или AWS Secrets Manager.
+                </p>
+            </li>
+            <li>
+                Конвенция за именоване на бранчове
+                <p>
+                    Добра практика е в рамките на даден екип/фирма да се спазва конвенция за именоване на бранчове. Това ускорява работния процес и предотваратява конфликти в кода.
+                </p>
+            </li>
+            <li>
+                Използване на допълнителни инструменти
+                <p>
+                    Особено полезно е използването на инструменти, които могат да помогнат за спазването на добрите практики. Примери за такива инструменти са:
+                    <ul>
+                        <li>gitolite</li>
+                        <li>gitslave</li>
+                        <li>gerrit</li>
+                    </ul>
+                </p>
+            </li>
+        </ol>
+    </div>
+    <div class="block-content">
+        <h2 id="resources">Използвана литература</h2>
+        <ol>
+            <li id="git-documentation">
+                <a href="https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control">Git documentation
+                    [1].</a>
+            </li>
+            <li id="VCS-concepts">
+                <a href="https://homes.cs.washington.edu/~mernst/advice/version-control.html#dvc-advice">Version control
+                    concepts and best practices [2].</a>
+            </li>
+            <li id="how-to-make">
+                <a href="https://www.specbee.com/blogs/git-best-practices-how-make-most-git">Git Best Practices – How to
+                    make the most of (g)it [3].</a>
+            </li>
+            <li id="guide">
+                <a href="https://www.datree.io/resources/github-best-practices">Top GitHub best practices guide for
+                    developers [4].</a>
+            </li>
+            <li id="git-best-practices">
+                <a href="https://sethrobertson.github.io/GitBestPractices/#commit%22">Commit Often, Perfect Later,
+                    Publish Once: Git Best Practices [5].</a>
+            </li>
+            <li id="best-practices-GIT">
+                <a href="https://deepsource.io/blog/git-best-practices/">Best practices for using Git [6].</a>
+            </li>
+            <li id="most-basic-git-commands">
+                <a href="https://rubygarage.org/blog/most-basic-git-commands-with-examples">Most Basic Git Commands with
+                    Examples [7].</a>
+            </li>
+            <li id="basic-git-commands">
+                <a href="https://www.hostinger.com/tutorials/basic-git-commands">Basic GIT Commands [8].</a>
+            </li>
+            <li id="wikipedia">
+                <a href="https://en.wikipedia.org/wiki/Git">Wikipedia-Git [9].</a>
+            </li>
+            <li id="good-commit-messages">
+                <a href="https://chris.beams.io/posts/git-commit/">How to Write a Git Commit Message [10].</a>
+            </li>
+        </ol>
+    </div>
+    <div class="block-content">
+        <h2 id="code-used">Списък с примерен програмен код</h2>
+        <ol>
+            <li id="code1">
+                <a href="https://intellipaat.com/blog/tutorial/devops-tutorial/git-tutorial/">Пример за конфигуриране на
+                    git [1].</a>
+            </li>
+            <li id="code2">
+                <a href="https://intellipaat.com/blog/tutorial/devops-tutorial/git-tutorial/">Пример за инициализиране
+                    на хранилище [2].</a>
+            </li>
+            <li id="code3">
+                <a href="https://intellipaat.com/blog/tutorial/devops-tutorial/git-tutorial/">Пример за проверка на
+                    състоянието на файловете [3].</a>
+            </li>
+            <li id="code4">
+                <a href="https://intellipaat.com/blog/tutorial/devops-tutorial/git-tutorial/">Пример за създаване на
+                    snapshot [4].</a>
+            </li>
+            <li id="code5">
+                <a href="https://intellipaat.com/blog/tutorial/devops-tutorial/git-tutorial/">Пример за изпращане на
+                    локалните промени към отдалеченото хранилище [5].</a>
+            </li>
+            <li id="code6">
+                <a href="https://intellipaat.com/blog/tutorial/devops-tutorial/git-tutorial/">Пример за копиране на
+                    отдалеченото хранилище [6].</a>
+            </li>
+            <li id="code7">
+                <a href="https://intellipaat.com/blog/tutorial/devops-tutorial/git-tutorial/">Пример за създаване на нов
+                    бранч [7].</a>
+            </li>
+            <li id="code8">
+                <a href="https://intellipaat.com/blog/tutorial/devops-tutorial/git-commands/">Пример за преминаване към
+                    друг бранч [8].</a>
+            </li>
+            <li id="code9">
+                <a href="https://intellipaat.com/blog/tutorial/devops-tutorial/git-commands/#git-merge">Пример за
+                    сливане на два бранча [9].</a>
+            </li>
+            <li id="code10">
+                <a href="https://intellipaat.com/blog/tutorial/devops-tutorial/git-tutorial/">Пример за прилагане на
+                    определени промени [10].</a>
+            </li>
+        </ol>
+    </div>
+    <div class="block-content">
+        <h2 id="img-used">Списък с фигури</h2>
+        <ol>
+            <li id="figure1">
+                <a href="https://www.bitsnbites.eu/a-tidy-linear-git-history/">Схема за история на версиите [1].</a>
+            </li>
+            <li id="figure2">
+                <a href="https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control">Централизирана система за
+                    контрол на версиите [2].</a>
+            </li>
+            <li id="figur3">
+                <a href="https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control">Разпределена система за
+                    контрол на версиите [3].</a>
+            </li>
+            <li id="figure4">
+                <a href="https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F">Съхраняване на данните като
+                    списък от файлово-базирани промени [4].</a>
+            </li>
+            <li id="figure5">
+                <a href="https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F">Записане на данните като поток
+                    от snapshot-и във времето [5].</a>
+            </li>
+            <li id="figure6">
+                <a href="https://rubygarage.org/blog/most-basic-git-commands-with-examples">Локално и отдалечено
+                    хранилище [6].</a>
+            </li>
+            <li id="figure7">
+                <a href="https://www.specbee.com/blogs/git-best-practices-how-make-most-git">Пример за лоши commit
+                    съобщения [7].</a>
+            </li>
+            <li>
+                <a href="https://blog.atom.io/2017/05/16/git-and-github-integration-comes-to-atom.html?fbclid=IwAR3HpIzauEPokouJwEfUu9BmhWkVxekWnl_EJFev4VdOp-czOQ-toj9z2dM">Фон
+                    [8].</a>
+            </li>
+        </ol>
+    </div>
+    <div class="block-content">
+        <h2 id="author">Автор:</h2>
+        <p>Име: Стоян Янев</p>
+        <p>Факултетен номер: 62240</p>
+        <p>Специалност: Софтурено инженерство</p>
+    </div>
+</body>

@@ -1,0 +1,149 @@
+body {
+    background-image: url("background.png");
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+h1 {
+    text-align: center;
+    color: #ffffff;
+    font-size: 40px;
+}
+
+#menu {
+    width: 300px;
+    position: fixed;
+    font-size: medium;
+}
+
+#menu a {
+    background-color: #eee;
+    color: #000000;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+    border: 1px solid #000000;
+}
+
+#menu a:hover {
+    background-color: #ccc;
+}
+
+#menu a.active {
+    background-color: #008B8B;
+    color: white;
+}
+
+h1,
+h2,
+h3 {
+    font-family: American Typewriter, serif;
+}
+
+.block-content {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    line-height: 1.5;
+    font-size: 20px;
+    text-align: justify;
+    margin-left: auto;
+    margin-right: auto;
+    width: 770px;
+    padding: 10px;
+    color: #ffffff;
+}
+
+figure>img {
+    width: 500px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+figcaption {
+    font-family: inherit;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-style: italic;
+    color: #87CEEB;
+}
+
+figcaption>a,
+sup>a {
+    color: #87CEEB;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+sup>a {
+    font-size: small;
+}
+
+#hash-code,
+#link {
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 20px;
+    color: #BC8F8F;
+}
+
+.command-img {
+    box-shadow: 0 0px 0px 0 white, 0 0px 8px 0 white;
+}
+
+p>code {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.highlight {
+    color: #000000;
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f6f8fa;
+    border-radius: 3px;
+}
+
+.wrong {
+    color: #ff0000;
+}
+
+.right {
+    color: #008000;
+}
+
+li>a {
+    text-decoration: none;
+    color: white;
+}
+
+@media only screen and (max-width: 1500px) {
+    .block-content {
+        width: 650px;
+    }
+    figure>img {
+        width: 400px;
+    }
+    p {
+        margin: 0px auto 0px auto;
+    }
+}
+
+@media only screen and (max-width: 1300px) {
+    .block-content {
+        width: 300px;
+    }
+    figure>img {
+        width: 250px;
+    }
+    p {
+        margin: 0px auto 0px auto;
+    }
+    #menu {
+        position: unset;
+        margin: 0px auto 0px auto;
+    }
+}
