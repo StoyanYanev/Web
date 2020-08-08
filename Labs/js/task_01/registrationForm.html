@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <script src="registrationForm.js"></script>
+    <title>Registration form</title>
+</head>
+<body>
+    <form action="registrationForm.php" onsubmit="return validate()" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" onfocusout="isValidUsername(this.value)" id="username">
+        <label id="invalidUsername"></label>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" onfocusout="isValidPassword(this.value)" id="password">
+        <label id="invalidPassword"></label>
+        <br>
+        <label for="confirmPassword">Confirm password:</label>
+        <input type="password" onfocusout="isValidConfirmPassword(this.value, password.value)" id="confirmPassword">
+        <label id="invalidConfirmPassword"></label>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

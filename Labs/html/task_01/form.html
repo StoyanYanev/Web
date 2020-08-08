@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="bg">
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+        <title>Добавяне на избираема дисциплина</title>
+    </head>
+    <body>
+        <form action="form.php" method="POST">
+          <label for="sName">Име на предмет:</label>
+          <br>
+          <input type="text" id="sName" name="subjectName" require>
+          <br>
+          <label for="lname">Преподавател:</label>
+          <br>
+          <input type="text" id="lName" name="lecturerName" require>
+          <br>
+          <label for="descr">Описание:</label>
+          <br>
+          <input type="text" id="descr" name="description" require>
+          <br>
+          <label for="groups">Група:</label>
+          <br>
+          <select id="groups" name="groups">
+            <option value="М">М</option>
+            <option value="ПМ">ПМ</option>
+            <option value="ОКН">ОКН</option>
+            <option value="ЯКН">ЯКН</option>
+          </select>
+          <br>
+          <label for="credits">Кредити:</label>
+          <br>
+          <input type="number" id="credits" name="credits" min="1" max="20">
+          <br>
+          <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>

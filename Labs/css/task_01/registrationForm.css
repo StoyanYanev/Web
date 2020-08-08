@@ -1,0 +1,27 @@
+form {
+    background-color: #f4f5f0;
+    width: 250px;
+    border: 1px solid;
+}
+
+h4 {
+    background-color: #97c00e;
+    text-align: center;
+    color: white;
+    padding: 7px;
+    margin: -1px -1px 20px -1px;
+}
+
+.registration-field {
+    margin-bottom: 10px;
+    width: 200px;
+    height: 25px;
+    margin-right: 20px;
+    margin-left: 20px;
+    padding-bottom: 5px;
+}
+
+#registrationButon {
+    background-color: #97c00e;
+    color: white;
+}

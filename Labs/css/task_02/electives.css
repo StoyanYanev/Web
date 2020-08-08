@@ -1,0 +1,108 @@
+.page-content {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.header {
+    height: 30px;
+    margin-right: 500px;
+    margin-bottom: 10px;
+}
+
+.header>button {
+    float: right;
+    margin-right: 8px;
+    margin-top: 8px;
+}
+
+.all-contents {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.elective-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+    color: #97bf0e;
+    margin: 0px
+}
+
+.info {
+    font-style: italic;
+}
+
+.button-color {
+    background-color: #97bf0e;
+    color: #ffffff;
+}
+
+.button-shape {
+    border: 1px solid #c3c3c2;
+    border-radius: 10px;
+    height: 30px;
+}
+
+.buttons-operation {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.navigation {
+    width: 300px;
+    float: left;
+    margin-right: 20px;
+    text-transform: uppercase;
+}
+
+.active {
+    background-color: #97bf0e;
+}
+
+.active>a {
+    color: #ffffff;
+}
+
+.sender-name {
+    color: #1e90ff;
+}
+
+.date {
+    font-size: smaller;
+}
+
+.content {
+    display: flex;
+}
+
+div>a {
+    text-decoration: none;
+    color: #000000;
+    padding-left: 15px;
+}
+
+.navigation-item {
+    height: 30px;
+    padding-top: 10px;
+}
+
+textarea {
+    width: 800px;
+    height: 70px;
+    border-radius: 8px;
+    border: 1px solid #c3c3c2;
+    resize: none;
+    padding: 15px;
+}
+
+button[name="cancel"] {
+    background-color: #ffffff;
+    color: #97bf0e;
+    border-color: #97bf0e;
+}

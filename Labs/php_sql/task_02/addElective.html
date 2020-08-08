@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <link rel="stylesheet" type="text/css" href="electives.css">
+    <title>Добавяне на избираема дисциплина</title>
+</head>
+
+<body>
+    <h2>Добавяне на избираема дисциплина</h2>
+    <form action="request-executor.php" method="POST">
+        <label for="course-subject">Име на предмет:</label>
+        <input type="text" id="course-subject" name="subjectName" require>
+        <label for="course-lecture">Преподавател:</label>
+        <input type="text" id="course-lecture" name="lecturerName" require>
+        <label for="course-description">Описание:</label>
+        <input type="text" id="descr" name="description" require>
+        <input type="submit" value="Добавяне">
+    </form>
+</body>
+
+</html>
